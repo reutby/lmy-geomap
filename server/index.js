@@ -2,20 +2,18 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import {getAllRecords,createRecord, DeleteRecord} from "./controllers/rental-record.js"
-
+import cors from 'cors';
+import rentalRecord from './routes/rental-records.js';
 const app = express();
 
 dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors());
 
-
+app.use('/records',rentalRecord);
 // get delete and post request 
-app.get('/', getAllRecords);
-app.post('/', createRecord);
-app.delete('/', DeleteRecord);
 
 
 const port = process.env.PORT || 5000;

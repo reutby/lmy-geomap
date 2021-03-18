@@ -24,14 +24,12 @@ const rentalRecordSchema = mongoose.Schema({
         coordinateX: {
             type: Number,
             required: true,
-            min: -180.0,
-            max: -85.06,
+           
         },
         coordinateY: {
             type: Number,
             required: true,
-            max: 180.0,
-            min: 85.06,
+            
         }
 
     },
