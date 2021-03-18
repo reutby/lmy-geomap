@@ -1,0 +1,4 @@
+export const FETCH_ALL_RECORDS = 'FETCH_ALL_RECORDS';
+export const CREATE_RECORD = 'CREATE_RECORD';
+export const DELETE_RECORD = 'DELETE_RECORD';
+
