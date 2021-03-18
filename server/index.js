@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-
+import {getAllRecords,createRecord, DeleteRecord} from "./controllers/rental-record.js"
 
 const app = express();
 
@@ -13,17 +13,9 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 
 // get delete and post request 
-app.get('/', (req,res)=>{
-    res.send('Hello to memories API');
-});
-
-app.post('/', (req,res)=>{
-    res.send('Hello to memories API');
-});
-
-app.delete('/', (req,res)=>{
-    res.send('Hello to memories API');
-});
+app.get('/', getAllRecords);
+app.post('/', createRecord);
+app.delete('/', DeleteRecord);
 
 
 const port = process.env.PORT || 5000;

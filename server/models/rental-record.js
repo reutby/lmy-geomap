@@ -5,8 +5,11 @@ const rentalRecordSchema = mongoose.Schema({
         type: String,
         default: 'rental-standards-current-issues'
     },
+    recordTimestamp: {
+        type: Date,
+        default: new Date().toISOString(),
+    },
     fields: {
-        type: Object,
         totalUnit: Number,
         businessOperator: String,
         detailUrl: String,
@@ -32,10 +35,7 @@ const rentalRecordSchema = mongoose.Schema({
         }
 
     },
-    recordTimestamp: {
-        type: Date,
-        default: new Date()
-    },
+   
 });
 
 
