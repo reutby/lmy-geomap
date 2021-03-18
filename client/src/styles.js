@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { Circle as CircleStyle, Stroke, Style } from 'ol/style';
 
 export let pointsStyles = {
@@ -14,14 +14,21 @@ export let pointsStyles = {
 
 }
 
-export default makeStyles({
+export default makeStyles((theme)=>({
     topContainer: {
         margin: '5rem auto',
     },
     gridItem: {
         position: "relative",
         border: '1px solid black',
-        height: 'auto',
+        height: '52rem',
+        overflowY:'scroll',
     },
+    [theme.breakpoints.down('sm')]: {
+        gridContainer:{
+            display:'flex',
+            flexDirection:'column-reverse',
+        }
+    }
 
-});
+}));
