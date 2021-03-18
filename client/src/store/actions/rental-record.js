@@ -21,6 +21,7 @@ export const createRecord = (record) => async (dispatch) => {
 
 export const deleteRecord = (id)=>async(dispatch)=>{
     try{
+        console.log(id);
         await api.deleteRecord(id);
         dispatch({type:actionTypes.DELETE_RECORD, payload:id})
     }catch(err){
