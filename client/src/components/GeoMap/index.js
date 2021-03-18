@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from "react";
 import * as ol from "ol";
 import MapContext from "../../MapContext";
 import useStyles from "./styles/GeoMap";
+import { defaults} from 'ol/interaction';
 const GeoMap = ({ children, zoom, center }) => {
     const mapRef = useRef();
     const [map, setMap] = useState(null);
@@ -12,7 +14,8 @@ const GeoMap = ({ children, zoom, center }) => {
             view: new ol.View({ zoom, center }),
             layers: [],
             controls: [],
-            overlays: []
+            overlays: [],
+            interactions: defaults({dragPan: false, mouseWheelZoom: false})
         };
 
         let mapObject = new ol.Map(options);

@@ -1,33 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import {Button,TableHead,TableBody,Table,TableCell, TableContainer, Paper,TableRow} from "@material-ui/core";
-import {RecordCustomRow} from "../";
+import { Button, Link, CircularProgress, TableHead, TableBody, Table, TableCell, TableContainer, Paper, TableRow } from "@material-ui/core";
+import { RecordCustomRow } from "../";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteRecord } from "../../store/actions/rental-record";
 import useStyles from "./styles/DataTable";
-const DataTable = ({ data, headers }) => {
+
+const createRowsData = (records) => {
+    const newRowsValues = [];
+    records.forEach((row) => {
+        const fieldsData = { ...row.fields, id: row._id };
+        newRowsValues.push(fieldsData);
+    })
+    return newRowsValues;
+}
+const DataTable = ({ headers, setCenterHandler }) => {
 
     const [rows, setRows] = useState(null);
-
-    const createRowsData = () => {
-        const newRowsValues = [];
-        data.forEach((row) => {
-            let newRow = [];
-            const fieldsData = { ...row.properties};
-            for (var key in fieldsData) {
-                newRow = [
-                    ...newRow,
-                    fieldsData[key]
-                ]
-            }
-            newRowsValues.push(newRow);
-        })
-        return newRowsValues;
-    }
+    const records = useSelector(state => state);
+    const dispatch = useDispatch();
     useEffect(() => {
-        setRows([...(createRowsData())]);
-    }, [])
+        setRows([...(createRowsData(records))]);
 
+    }, [records])
     const classes = useStyles();
     return (
-        <TableContainer component={Paper}>
+        !rows ? <CircularProgress /> : <TableContainer className={classes.tableContainer} component={Paper}>
             <Table className={classes.table} size="small" aria-label="simple table">
                 <TableHead >
                     <TableRow>
@@ -37,19 +34,23 @@ const DataTable = ({ data, headers }) => {
                 </TableHead>
                 {rows &&
                     <TableBody>
-                        <RecordCustomRow headers={headers}/>
+                        <RecordCustomRow headers={headers} />
                         {rows.map((row) => (
-                            <TableRow key={`${row}`}>
+                            <TableRow key={row.id}>
                                 <TableCell align="center" component="th" scope="row" className={classes.actions}>
-                                    <Button variant="contained" color="primary">Select</Button>
-                                    <Button variant="contained" color="secondary">Delete</Button>
+                                    <Button variant="contained" onClick={() => { setCenterHandler(row.coordinateX, row.coordinateY) }} color="primary">Select</Button>
+                                    <Button variant="contained" onClick={() => { dispatch(deleteRecord(row.id)) }} color="secondary">Delete</Button>
                                 </TableCell>
                                 {
-                                    row.map((rowCell) =>
-                                        <TableCell key={rowCell} component="th" scope="row">
-                                            {rowCell}
+                                    headers.map((header) =>
+                                        <TableCell className={classes.tableCell} align="center" key={`${header} ${row.id}`} component="th" scope="row">
+                                            {header === 'detailUrl' ?
+                                                <Link href={row[header]} >
+                                                    Link
+                                                </Link> : row[header]}
                                         </TableCell>)
                                 }
+
                             </TableRow>
                         ))}
                     </TableBody>}
