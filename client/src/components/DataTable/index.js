@@ -6,10 +6,10 @@ import { deleteRecord } from "../../store/actions/rental-record";
 import useStyles from "./styles/DataTable";
 
 const createRowsData = (records) => {
-    const newRowsValues = [];
-    records.forEach((row) => {
+    const newRowsValues = new Array(records.length);
+    records.forEach((row,index) => {
         const fieldsData = { ...row.fields, id: row._id };
-        newRowsValues.push(fieldsData);
+        newRowsValues[records.length-1-index] = fieldsData;
     })
     return newRowsValues;
 }
@@ -25,19 +25,22 @@ const DataTable = ({ headers, setCenterHandler }) => {
     const classes = useStyles();
     return (
         !rows ? <CircularProgress /> : <TableContainer className={classes.tableContainer} component={Paper}>
-            <Table className={classes.table} size="small" aria-label="simple table">
-                <TableHead >
+            <Table stickyHeader  className={classes.table} size="small" aria-label="simple table">
+                <TableHead  >
                     <TableRow>
                         <TableCell align="center" className={classes.headers} >Actions</TableCell>
                         {headers.map((header) => <TableCell className={classes.headers} key={header}>{header}</TableCell>)}
                     </TableRow>
                 </TableHead>
+                <TableBody>
+                    <RecordCustomRow headers={headers} />
+                </TableBody>
                 {rows &&
                     <TableBody>
-                        <RecordCustomRow headers={headers} />
                         {rows.map((row) => (
+
                             <TableRow key={row.id}>
-                                <TableCell align="center" component="th" scope="row" className={classes.actions}>
+                                <TableCell align="center" component="th" scope="row" className={classes.tableCell}>
                                     <Button variant="contained" onClick={() => { setCenterHandler(row.coordinateX, row.coordinateY) }} color="primary">Select</Button>
                                     <Button variant="contained" onClick={() => { dispatch(deleteRecord(row.id)) }} color="secondary">Delete</Button>
                                 </TableCell>
@@ -50,7 +53,6 @@ const DataTable = ({ headers, setCenterHandler }) => {
                                                 </Link> : row[header]}
                                         </TableCell>)
                                 }
-
                             </TableRow>
                         ))}
                     </TableBody>}

@@ -13,8 +13,7 @@ const App = () => {
   const classes = useStyles();
   const [center, setCenter] = useState([-123.10664756,
     49.28261413]);
-  const [zoom, setZoom] = useState(12);
-  const headers = ['totalUnit', 'businessOperator', 'detailUrl','street','streetNumber','totalOutstanding','geoLocalArea','coordinateX','coordinateY']
+  const headers = ['coordinateX','coordinateY','totalUnit', 'businessOperator', 'detailUrl','street','streetNumber','totalOutstanding','geoLocalArea'];
   const dispatch = useDispatch();
   const setCenterHandler = (x,y)=>{
     setCenter([x,y]);
@@ -24,9 +23,9 @@ const App = () => {
   });
   return (
     <Container className={classes.topContainer} maxWidth="xl">
-      <Grid container  className={classes.gridContainer} spacing={3}>
-        <Grid item className={classes.gridItem} md={5} sm={12}>
-          <GeoMap center={fromLonLat(center)} zoom={zoom}>
+      <Grid container  className={classes.gridContainer} spacing={2}>
+        <Grid item className={classes.gridItem} md={5} xs={12}>
+          <GeoMap center={fromLonLat(center)} zoom={14}>
             <Layers>
               <TileLayer
                 source={osm()}
@@ -41,7 +40,7 @@ const App = () => {
             </Controls>
           </GeoMap>
         </Grid>
-        <Grid item className={classes.gridItem} md={7} sm={12}>
+        <Grid item className={classes.gridItem} md={7} xs={12}>
           <DataTable setCenterHandler={setCenterHandler} headers={headers}/>
         </Grid>
       </Grid>

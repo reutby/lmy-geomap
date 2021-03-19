@@ -15,7 +15,7 @@ const GeoMap = ({ children, zoom, center }) => {
             layers: [],
             controls: [],
             overlays: [],
-            interactions: defaults({dragPan: false, mouseWheelZoom: false})
+            interactions: defaults({dragPan: false  })
         };
 
         let mapObject = new ol.Map(options);

@@ -10,7 +10,7 @@ export default makeStyles((theme) => (
         },
         [theme.breakpoints.down('sm')]: {
             olMap: {
-                width: '19rem',
+                width: 'auto',
             }
         }
 

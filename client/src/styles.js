@@ -1,33 +1,37 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { Circle as CircleStyle, Stroke, Style } from 'ol/style';
+import {RegularShape, Stroke, Style, Fill } from 'ol/style';
 
 export let pointsStyles = {
     'Point': new Style({
-        image: new CircleStyle({
-			radius: 5,
-			fill: null,
-			stroke: new Stroke({
-				color: 'red',
-			}),
-		}),
+        image: new RegularShape({
+            stroke: new Stroke({color: 'red', width: 2}),
+            fill: new Fill({color: 'red'}),
+            points: 4,
+            radius: 10,
+            radius2: 0,
+            angle: 0,
+          }),
     }),
 
 }
 
-export default makeStyles((theme)=>({
+export default makeStyles((theme) => ({
     topContainer: {
         margin: '5rem auto',
+        position:'relative',
     },
     gridItem: {
         position: "relative",
-        border: '1px solid black',
-        height: '52rem',
-        overflowY:'scroll',
+        height: 'auto',
+        
+    },
+    gridContainer:{
+        boxShadow:'0 1rem 2rem rgba(0,0,0,.6)',
     },
     [theme.breakpoints.down('sm')]: {
-        gridContainer:{
-            display:'flex',
-            flexDirection:'column-reverse',
+        gridContainer: {
+            flexDirection: 'column-reverse',
+            width:'auto',
         }
     }
 
