@@ -6,7 +6,7 @@ import { GeoMap, DataTable, VectorLayer, TileLayer,FullScreenControl } from "./c
 import { Layers, Controls } from "./hoc";
 import {useDispatch} from 'react-redux';
 import {getAllRecords} from "./store/actions/rental-record";
-import { osm } from "./Source";
+import { osm } from "./source";
 import { fromLonLat } from 'ol/proj';
 
 const App = () => {

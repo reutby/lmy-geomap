@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from "react";
 import * as ol from "ol";
-import MapContext from "../../MapContext";
+import MapContext from "../../contexts/MapContext";
 import useStyles from "./styles/GeoMap";
 import { defaults} from 'ol/interaction';
 const GeoMap = ({ children, zoom, center }) => {
