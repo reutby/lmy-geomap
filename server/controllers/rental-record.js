@@ -19,7 +19,7 @@ export const createRecord = (req, res) => {
         .catch(error => res.status(409).json({ message: error.message }));
 }
 
-export const DeleteRecord = (req, res) => {
+export const deleteRecord = (req, res) => {
     const {id} = req.params;
     
     RentalRecord.findByIdAndDelete(id)

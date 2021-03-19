@@ -1,10 +1,10 @@
 import express from "express";
-import { getAllRecords, createRecord, DeleteRecord } from "../controllers/rental-record.js"
+import { getAllRecords, createRecord, deleteRecord } from "../controllers/rental-record.js"
 
 const router = express.Router();
 
 router.get('/', getAllRecords);
 router.post('/', createRecord);
-router.delete('/:id', DeleteRecord);
+router.delete('/:id', deleteRecord);
 
 export default router;
