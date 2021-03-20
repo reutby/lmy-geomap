@@ -1,3 +1,12 @@
+# Technologies
+  ### Client Side:
+    * React.js (using hooks).
+    * Redux.js for state management.
+    * Axios.js for Api requsts.
+  ### Server Side:
+    * Node.js and Express.js. 
+    * Mongoose.js and MongoDB Atlas Database.
+
 # Instruction
 
 * Clone the repository to your local environment.
